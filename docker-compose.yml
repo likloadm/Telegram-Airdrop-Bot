@@ -7,7 +7,7 @@ services:
     depends_on:
       - mongodb
     volumes:
-      - convbot:/app/conversationbot
+      - ./bot:/app
   mongodb:
     image: mongo
     restart: always
@@ -15,7 +15,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: secret_password
     volumes:
-      - mongo-db:/data/db
+      - ./mongo-db:/data/db
 
 volumes:
   mongo-db:

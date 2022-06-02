@@ -1,3 +1,7 @@
 .env
 .vscode
 test.py
+.idea
+bot/conversationbot
+bot/users.json
+bot/*.png

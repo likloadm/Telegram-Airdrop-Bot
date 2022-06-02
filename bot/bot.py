@@ -141,12 +141,12 @@ Withdrawals would be sent out automatically to your {AIRDROP_NETWORK} address on
 NOTE: Users found Cheating would be disqualified & banned immediately."""
 
 BALANCE_TEXT = f"""
-{COIN_NAME} Airdrop Balance: *IARTBALANCE*
-Referral Balance: *REFERRALBALANCE*
+{COIN_NAME} Airdrop Balance: IARTBALANCE
+Referral Balance: REFERRALBALANCE
 """
 
 # %% Functions
-
+print(re)
 
 def setBotStatus(status):
     BOT_STATUS["status"] = status
@@ -404,19 +404,22 @@ Here is *your referral link*
         twitterUsername = str(info["twitter_username"])
         reply = f"""
 Name: {name}
+{balance}
 Referrals: {refferals}
 {AIRDROP_NETWORK} address: {bep20Address}
 Twitter Username: {twitterUsername}
 """
-    if(reply == ""):
-        joke = getRandomJoke()
-        joke = joke.split("  -")
-        reply = f"""
-I'm not sure what you meant, but here is a joke for you!
-> {joke[0]}
-- {joke[1]}
-"""
-    update.message.reply_text(reply, reply_markup=ReplyKeyboardMarkup(reply_keyboard), parse_mode=telegram.ParseMode.MARKDOWN)
+        update.message.reply_text(reply, reply_markup=ReplyKeyboardMarkup(reply_keyboard))
+    else:
+        if(reply == ""):
+            joke = getRandomJoke()
+            joke = joke.split("  -")
+            reply = f"""
+    I'm not sure what you meant, but here is a joke for you!
+    > {joke[0]}
+    - {joke[1]}
+    """
+        update.message.reply_text(reply, reply_markup=ReplyKeyboardMarkup(reply_keyboard), parse_mode=telegram.ParseMode.MARKDOWN)
     return LOOP
 
 
@@ -433,7 +436,7 @@ states = {
     FOLLOW_TELEGRAM: [MessageHandler(Filters.regex('^Submit Details$'), follow_telegram), cancelHandler],
     FOLLOW_TWITTER: [MessageHandler(Filters.regex('^Done$'), follow_twitter), cancelHandler],
     SUBMIT_ADDRESS: [cancelHandler, MessageHandler(Filters.text, submit_address)],
-    END_CONVERSATION: [cancelHandler, MessageHandler(Filters.regex('^0x[a-fA-F0-9]{40}$'), end_conversation)],
+    END_CONVERSATION: [cancelHandler, MessageHandler(Filters.regex('^T[a-zA-Z0-9]{33}$'), end_conversation)],
     LOOP: [MessageHandler(
         Filters.text, loopAnswer
     )],
