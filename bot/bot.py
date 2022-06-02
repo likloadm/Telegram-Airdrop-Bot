@@ -146,7 +146,6 @@ Referral Balance: REFERRALBALANCE
 """
 
 # %% Functions
-print(re)
 
 def setBotStatus(status):
     BOT_STATUS["status"] = status
